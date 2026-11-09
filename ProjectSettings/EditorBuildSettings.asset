@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/NextInterview/Scenes/Menu.unity
+    guid: bd8fc88f7cacb4040a8c3b0ba174e964
+  - enabled: 1
+    path: Assets/NextInterview/Scenes/City.unity
+    guid: 06444b37fa65a414e8e8c36167bc96aa
+  - enabled: 1
+    path: Assets/NextInterview/Scenes/Interview.unity
+    guid: aadac16daeb6f7f498ba9807174c3fb0
+  - enabled: 1
+    path: Assets/NextInterview/Scenes/Win.unity
+    guid: d73fa7992aa041c4c8102125f9009ec0
+  - enabled: 1
+    path: Assets/NextInterview/Scenes/GameOver.unity
+    guid: 607d8e1803ea3e24abfb01979d4e9d81
+  m_configObjects:
+    com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

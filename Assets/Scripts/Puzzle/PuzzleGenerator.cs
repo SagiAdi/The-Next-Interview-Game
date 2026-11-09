@@ -48,30 +48,30 @@ public static class PuzzleGenerator
         switch (difficulty)
         {
             case 1:
-            {
-                int den = Random.Range(3, 10);
-                int a = Random.Range(1, den);
-                int c = Random.Range(1, den);
-                answer = new Fraction(a + c, den);
-                text = a + "/" + den + " + " + c + "/" + den + " = ?";
-                break;
-            }
+                {
+                    int den = Random.Range(3, 10);
+                    int a = Random.Range(1, den);
+                    int c = Random.Range(1, den);
+                    answer = new Fraction(a + c, den);
+                    text = a + "/" + den + " + " + c + "/" + den + " = ?";
+                    break;
+                }
             case 2:
-            {
-                int a = Random.Range(1, 6), b = Random.Range(2, 9);
-                int c = Random.Range(1, 6), d = Random.Range(2, 9);
-                answer = new Fraction(a * c, b * d);
-                text = a + "/" + b + " x " + c + "/" + d + " = ?";
-                break;
-            }
+                {
+                    int a = Random.Range(1, 6), b = Random.Range(2, 9);
+                    int c = Random.Range(1, 6), d = Random.Range(2, 9);
+                    answer = new Fraction(a * c, b * d);
+                    text = a + "/" + b + " x " + c + "/" + d + " = ?";
+                    break;
+                }
             default:
-            {
-                int a = Random.Range(1, 6), b = Random.Range(2, 9);
-                int c = Random.Range(1, 6), d = Random.Range(2, 9);
-                answer = new Fraction(a * d, b * c);
-                text = a + "/" + b + " divided by " + c + "/" + d + " = ?";
-                break;
-            }
+                {
+                    int a = Random.Range(1, 6), b = Random.Range(2, 9);
+                    int c = Random.Range(1, 6), d = Random.Range(2, 9);
+                    answer = new Fraction(a * d, b * c);
+                    text = a + "/" + b + " divided by " + c + "/" + d + " = ?";
+                    break;
+                }
         }
 
         // Build three wrong answers close to the right one.

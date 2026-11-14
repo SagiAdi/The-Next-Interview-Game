@@ -2,95 +2,286 @@
 
 > *כל משרה מתחילה בפרויקט אחד. הראיון הוא המקום שבו מוכיחים אותו.*
 
-משחק דו-ממדי מבוסס Unity על חיפוש עבודה. השחקן מסתובב בעיר קטנה, פותר חידות מתמטיות, בונה קשרים עם אנשים, ואז מתראיין למשרה.
+משחק דו-ממדי ב-Unity על חיפוש עבודה. השחקן מסתובב בעיר, פותר חידות כדי לצבור פרויקטים, יוצר קשרים עם אנשים, מתחמק מהסחות דעת, ואז מתראיין למשרה.
 
-**🔗 קישורים**
-- שחקו בדפדפן (WebGL): https://adisagi.itch.io/thenextinterview`[קישור itch.io]`
-- סרטון משחק במובייל: https://youtu.be/IqiK_WastL4?si=-GWn2LXcySmgsbb0`[קישור YouTube (Unlisted)]`
-- תיעוד חלק א' (תכנון שלבים ומחקר שוק): https://github.com/SagiAdi/The-Next-Interview
+**קישורים**
+
+- שחקו בדפדפן (itch.io): https://adisagi.itch.io/thenextinterview
+- סרטון משחק במובייל: https://youtu.be/IqiK_WastL4
+- תכנון המשחק (רכיבים רשמיים, מחקר שוק ותכנון שלבים): https://github.com/SagiAdi/The-Next-Interview
+
+**צוות:** שגיא רהט, עדי פלצקי.
 
 ---
 
-## 📖 איך משחקים
+## איך משחקים
 
-1. **העיר:** מסתובבים בעיר ורואים רמז "Interact" כשמתקרבים לדמות או לחדר.
-2. **חדר הפאזלים:** פותרים חידת חשבון שברים. כל חידה שנפתרת מוסיפה **פרויקט** לתיק העבודות.
-3. **אנשי קשר:** מדברים עם אנשים כדי ליצור **קשר פעיל** (נשאר פעיל 90 שניות).
-4. **לוח המשרות:** כשיש מספיק פרויקטים, בוחרים משרה ומגישים מועמדות.
-5. **הראיון:** עונים על שלוש שאלות חופשיות. מעריך אוטומטי נותן ציון, ואם הוא עומד בדרישה, מקבלים את המשרה.
+1. **פרויקטים:** בחדר החידות (מימין) עומדים מול חידה ולוחצים E. תשובה נכונה מוסיפה נקודות פרויקט (חידה קשה נותנת יותר).
+2. **קשרים:** עומדים מול אדם בעיר ולוחצים E. כל קשר פעיל 90 שניות ונותן בונוס של 5 נקודות בראיון (עד 15).
+3. **הסחות דעת:** הכדורים האדומים והסגולים קופצים בעיר. כל פגיעה מורידה זמן מהשעון, ופגיעה חזקה מורידה יותר.
+4. **לוח המשרות:** כשיש מספיק פרויקטים, עומדים מול הלוח הכחול, לוחצים E ובוחרים משרה.
+5. **הראיון:** עונים על שלוש שאלות. הציון הסופי הוא ממוצע התשובות ועוד בונוס הקשרים.
 
-| משרה | דרישה | ציון נדרש |
+| משרה | פרויקטים נדרשים | ציון נדרש |
 |---|---|---|
-| Junior Developer | פרויקט אחד | 60 |
-| Senior Game Developer | 4 פרויקטים | 80 |
-| Lead Designer | 6 פרויקטים | 90 |
+| Junior Developer | 1 | 60 |
+| Senior Game Developer | 4 | 80 |
+| Lead Designer | 6 | 90 |
 
-הזמן במשחק: **5 דקות** לכל סבב. אם הזמן נגמר לפני שמקבלים משרה, מסך הפסד מוצג והסבב מתחיל מחדש.
+**ניצחון:** התקבלתם למשרה. **הפסד:** חמש הדקות נגמרו לפני שהתקבלתם.
 
----
-
-## 🕹️ שליטה
-
-| פעולה | מחשב | מובייל |
+| פעולה | מחשב | טלפון |
 |---|---|---|
-| תזוזה | WASD או חצים | ג'ויסטיק עגול בפינה השמאלית התחתונה |
-| אינטראקציה | E או Space | כפתור Interact בפינה הימנית התחתונה |
+| תזוזה | חצים או WASD | ג'ויסטיק בפינה השמאלית התחתונה |
+| אינטראקציה | E או רווח | כפתור Interact בפינה הימנית התחתונה |
 
 ---
 
-## ⚙️ הרצה מהקוד
+## איך מריצים
 
-**דרישות:** Unity 6 (גרסה `[מספר הגרסה שבה פיתחתם]`), עם חבילת Input System.
+1. מתקינים Unity `6000.6.7f1` (עם מודול Web).
+2. משכפלים את הריפו ופותחים את התיקייה ב-Unity Hub (Add ← Add project from disk).
+3. פותחים את הסצנה `Assets/Scenes/Menu.unity` ולוחצים Play.
 
-1. שכפלו את הריפו.
-2. פתחו את התיקייה ב-Unity Hub.
-3. מהתפריט העליון: **Tools ← Next Interview ← Create Everything**. הכלי יוצר את הסצנות, הפריפאבים, משרות הדוגמה, והגדרות הבנייה.
-4. פתחו את סצנת **Menu** ולחצו **Play**.
+הסצנות, הפריפאבים וקובצי הנתונים נוצרים על ידי הכלי **Tools ← Next Interview ← Create Everything**. הם כבר נמצאים בריפו, ואפשר להריץ את הכלי שוב כדי לבנות אותם מחדש.
 
----
-
-## 🧩 איפה הקוד
-
-| תיקייה | תוכן |
-|---|---|
-| `Assets/NextInterview/Scripts/Player` | תזוזה, אינטראקציה, ג'ויסטיק (InputAction, SerializeField) |
-| `Assets/NextInterview/Scripts/World` | אינטראקציה עם עולם: אנשי קשר, חדר פאזלים, לוח משרות, Spawner |
-| `Assets/NextInterview/Scripts/Interview` | לוגיקת הראיון וההערכה (מעריך מקומי ומעריך AI) |
-| `Assets/NextInterview/Scripts/UI` | מסכי HUD, מסך סיום, תפריטים |
-| `Assets/NextInterview/Scripts/Core` | GameData (נתונים שנשמרים בין סצנות), מעברי סצנות |
-| `Assets/NextInterview/Editor` | כלי ההתקנה `Create Everything` |
+לבניית גרסת הדפדפן: **Tools ← Next Interview ← Build WebGL**. התוצאה נשמרת בתיקייה `Builds/WebGL`.
 
 ---
 
-## ✅ עמידה בדרישות המטלה
+## פיסיקה במשחק (מטלה 4, חלק א)
 
-- **Prefabs:** שחקן, דמויות, חידה, לוח משרות, ו-Spawner. נמצאים ב-`Assets/NextInterview/Prefabs`.
-- **Spawning:** `Spawner` יוצר דמויות אקראיות באזור העיר, ובודק שאין התנגשות לפני היצירה.
-- **התנגשויות:** קירות חוסמים את השחקן, ואינטראקציות נפתחות במרחק קבוע.
-- **מעברי סצנות עם שמירת נתונים:** `GameData` נשאר בין סצנות (Menu, City, Interview, Win, GameOver) ושומר פרויקטים, קשרים וזמן.
-- **שליטה במובייל:** ג'ויסטיק ורגע של אינטראקציה במסך מגע.
-- **ייצוא:** WebGL ב-itch.io, ו-APK לאנדרואיד באותו עמוד.
-- **קוד מסודר:** שדות `SerializeField` ו-`InputAction`, תגובות בעברית ובאנגלית במקומות מורכבים.
-- **Linter:** `.github/workflows/linter.yml` רץ בכל push.
+| תכונה | איפה בקוד | מה היא עושה במשחק |
+|---|---|---|
+| גוף קשיח `Rigidbody2D` | `Player/PlayerMover.cs`, `Obstacles/Distraction.cs` | השחקן וההסחות הם גופים דינמיים, והקירות עוצרים אותם בהתנגשות רגילה |
+| כוחות `AddForce`, `AddTorque` | `PlayerMover.FixedUpdate`, `Distraction.Launch` | השחקן נדחף אל המהירות המבוקשת (F = m·a). ההסחה מקבלת דחיפה וסיבוב בשיגור |
+| הטלת קרניים `CircleCast`, `Raycast` | `Player/InteractionSensor.cs` | עיגול מוטל קדימה מהשחקן כדי למצוא עם מה אפשר לתקשר, וקרן בודקת שאין קיר באמצע |
+| התנגשות `Collision2D` | `Distraction.OnCollisionEnter2D` | הזמן שמאבדים תלוי ב-`relativeVelocity`, וההסחה נהדפת מנקודת המגע (`GetContact`) |
+| חומר פיסיקלי `PhysicsMaterial2D` | `Assets/Data/Physics/Bouncy` | ההסחות קופצות מהקירות בלי לאבד מהירות |
 
----
-
-## 🤖 כלי AI ששימשו בפיתוח
-
-- **Claude (Anthropic):** עזרה בכתיבת קוד, תיקון באגים, ותכנון מבנה הסצנות. תוכלו לקרוא את ההסברים שניתנו בשיחה.
-  - דוגמאות לפרומפטים: `[הוסיפו 2–3 פרומפטים שבאמת שלחתם]`
-- **כלי עיצוב גרפי:** `[אם השתמשתם בכלי AI לתמונות או לאנימציות, פרטו כאן]`
-- **הערה:** כל הקוד נבדק ונערך על ידי הצוות. אנחנו מבינים את הקבצים המרכזיים ויכולים להסביר אותם.
+בקר דמות קינמטי (`CharacterController`) ממומש במשחק השני שלנו, [Life Capital](https://github.com/SagiAdi/Life-Capital).
 
 ---
 
-## 👥 צוות
+## ארכיטקטורה (מטלה 4, חלק ב)
 
-- **שגיא רהט** (GitHub: [@SagiAdi](https://github.com/SagiAdi))
-- **עדי פלצקי** (GitHub: [@AdiPlatzky](https://github.com/AdiPlatzky))
+### מבנה התיקיות
+
+```
+Assets/
+├── Scripts/
+│   ├── Player/      PlayerInputReader, PlayerMover, InteractionSensor, PlayerInteractor, PlayerFocus
+│   ├── World/       Interactable, PuzzleStation, ContactNPC, JobBoardZone, Spawner
+│   ├── Obstacles/   Distraction, DistractionLauncher, IDistractable
+│   ├── Game/        GameSession, RoundTimer, RoundRules, Scenes
+│   ├── Interview/   InterviewSession, InterviewResult, IInterviewEvaluator, MockEvaluator, AiEvaluator
+│   ├── Puzzle/      PuzzleGenerator
+│   ├── UI/          RoundHud, MessageLabel, InteractPrompt, TouchControls, VirtualJoystick,
+│   │                PuzzlePanel, JobBoardPanel, InterviewScreen, MenuScreen, EndScreen, UIBuilder
+│   ├── Events/      EventChannel, MessageChannel, PuzzleRequestChannel, JobBoardChannel
+│   ├── Data/        GameSettings, JobOffer, DistractionType  (מחלקות ScriptableObject)
+│   ├── Animation/   SpriteAnimator, VelocityAnimationDriver
+│   └── Utils/       Placeholder, PlaceholderArt
+├── Data/            קובצי הנתונים: Jobs, Distractions, Events, Physics
+├── Resources/       GameSettings.asset
+├── Prefabs/         PuzzleStation, ContactNPC (x3), Distraction
+├── Scenes/          Menu, City, Interview, Win, GameOver
+├── Art/             דמויות
+└── Editor/          SetupWizard, WebBuild
+```
+
+### יחסי המחלקות
+
+קוד המשחק (שחקן, עולם, מכשולים, חוקים) לא מכיר את קוד הממשק. הממשק מאזין לאירועים, וכל הרשמה ב-`OnEnable` מבוטלת ב-`OnDisable`.
+
+```mermaid
+classDiagram
+    direction LR
+
+    class GameSession {
+        <<singleton>>
+        +Projects
+        +Connections
+        +TimeLeft
+        +IsPaused
+        +SpendTime(seconds)
+        +AddProject(points)
+        +AddConnection()
+        event ProjectsChanged
+        event ConnectionsChanged
+        event TimeChanged
+        event TimeUp
+    }
+    class RoundTimer
+    class RoundRules
+    class PlayerInputReader {
+        +Move
+        event InteractPressed
+    }
+    class PlayerMover {
+        +Facing
+    }
+    class InteractionSensor {
+        +Target
+        event TargetChanged
+    }
+    class PlayerInteractor
+    class PlayerFocus
+    class IDistractable {
+        <<interface>>
+        +LoseFocus(seconds)
+    }
+    class Interactable {
+        <<abstract>>
+        +Prompt
+        +Interact()
+    }
+    class PuzzleStation
+    class ContactNPC
+    class JobBoardZone
+    class Spawner {
+        event Spawned
+    }
+    class Distraction {
+        +Launch(type)
+    }
+    class DistractionLauncher
+    class DistractionType {
+        <<ScriptableObject>>
+    }
+    class MessageChannel {
+        <<ScriptableObject event>>
+    }
+    class PuzzleRequestChannel {
+        <<ScriptableObject event>>
+    }
+    class JobBoardChannel {
+        <<ScriptableObject event>>
+    }
+    class RoundHud
+    class MessageLabel
+    class InteractPrompt
+    class PuzzlePanel
+    class JobBoardPanel
+    class TouchControls
+
+    Interactable <|-- PuzzleStation
+    Interactable <|-- ContactNPC
+    Interactable <|-- JobBoardZone
+    IDistractable <|.. PlayerFocus
+
+    RoundTimer --> GameSession : SpendTime
+    RoundRules ..> GameSession : listens TimeUp
+    PlayerMover --> PlayerInputReader : reads Move
+    InteractionSensor --> PlayerMover : reads Facing
+    InteractionSensor --> Interactable : finds
+    PlayerInteractor ..> PlayerInputReader : listens InteractPressed
+    PlayerInteractor --> InteractionSensor : uses Target
+    PlayerFocus --> GameSession : SpendTime
+    Distraction --> IDistractable : hits
+    Distraction --> DistractionType : data
+    DistractionLauncher ..> Spawner : listens Spawned
+    DistractionLauncher --> Distraction : Launch
+
+    PuzzleStation --> PuzzleRequestChannel : Raise
+    PuzzleStation --> MessageChannel : Raise
+    ContactNPC --> MessageChannel : Raise
+    PlayerFocus --> MessageChannel : Raise
+    JobBoardZone --> JobBoardChannel : Raise
+
+    PuzzlePanel ..> PuzzleRequestChannel : listens
+    JobBoardPanel ..> JobBoardChannel : listens
+    MessageLabel ..> MessageChannel : listens
+    RoundHud ..> GameSession : listens
+    InteractPrompt ..> InteractionSensor : listens TargetChanged
+    TouchControls --> PlayerInputReader : touch input
+```
+
+חץ מלא פירושו קריאה ישירה. חץ מקווקו פירושו האזנה לאירוע.
+
+סצנת הראיון בנויה באותה צורה: החוקים ב-`InterviewSession`, והמסך מאזין לו.
+
+```mermaid
+classDiagram
+    direction LR
+    class InterviewSession {
+        +SubmitAnswer(answer)
+        event QuestionAsked
+        event AnswerScored
+        event AnswerRejected
+        event Finished
+    }
+    class InterviewScreen
+    class IInterviewEvaluator {
+        <<interface>>
+        +Score(runner, question, answer, onScored)
+    }
+    class MockEvaluator
+    class AiEvaluator
+    class GameSession {
+        <<singleton>>
+    }
+
+    IInterviewEvaluator <|.. MockEvaluator
+    IInterviewEvaluator <|.. AiEvaluator
+    InterviewSession --> IInterviewEvaluator : scores answers
+    InterviewSession --> GameSession : job, bonus, result
+    InterviewScreen ..> InterviewSession : listens
+    InterviewScreen --> InterviewSession : SubmitAnswer
+```
+
+### האירועים: מי שולח ומי מקבל
+
+| אירוע | סוג | מי שולח | מי מאזין |
+|---|---|---|---|
+| `TimeChanged`, `ProjectsChanged`, `ConnectionsChanged` | `event` של C# | `GameSession` | `RoundHud` |
+| `TimeUp` | `event` של C# | `GameSession` | `RoundRules` (טוען את מסך ההפסד) |
+| `InteractPressed` | `event` של C# | `PlayerInputReader` | `PlayerInteractor` |
+| `TargetChanged` | `event` של C# | `InteractionSensor` | `InteractPrompt` |
+| `Spawned` | `event` של C# | `Spawner` | `DistractionLauncher` |
+| `DirectionChanged` | `event` של C# | `VirtualJoystick` | `TouchControls` |
+| `QuestionAsked`, `AnswerScored`, `AnswerRejected`, `Finished` | `event` של C# | `InterviewSession` | `InterviewScreen` |
+| `Messages` | ערוץ ScriptableObject | `PuzzleStation`, `ContactNPC`, `PlayerFocus` | `MessageLabel` |
+| `PuzzleRequests` | ערוץ ScriptableObject | `PuzzleStation` | `PuzzlePanel` |
+| `JobBoardOpened` | ערוץ ScriptableObject | `JobBoardZone` | `JobBoardPanel` |
+
+### שלוש החלטות ארכיטקטורה
+
+**1. ערוצי אירועים (ScriptableObject) בין העולם לממשק, במקום קריאה ישירה.**
+בגרסה הקודמת חידה קראה ישירות ל-`PuzzlePanel.Get().Open(...)` ול-`HUD.Say(...)`, כך שקוד המשחק הכיר את הממשק ונשען על משתנים סטטיים. עכשיו החידה מרימה אירוע על ערוץ, והפאנל מאזין לו. החלופה הייתה להשאיר הפניה ישירה. בחרנו בערוץ כי אפשר להחליף או למחוק את הפאנל בלי לגעת בקוד המשחק, וכי פריפאב שנוצר בזמן ריצה לא צריך לחפש אובייקט בסצנה.
+
+**2. פיצול הבקר של השחקן לרכיבים קטנים, במקום מחלקה אחת.**
+`PlayerController2D` הישן טיפל בקלט, בתנועה, בהתנגשויות, באינטראקציה ובהדפסות. עכשיו יש חמישה רכיבים, ולכל אחד אחריות אחת: `PlayerInputReader` קורא קלט, `PlayerMover` מזיז, `InteractionSensor` מוצא מטרה, `PlayerInteractor` מפעיל אותה, ו-`PlayerFocus` מטפל בפגיעות. החלופה הייתה מחלקת אב משותפת. בחרנו בהרכבה כי כך אפשר להחליף את אופן התנועה בלי לגעת באינטראקציה.
+
+**3. תנועה בפיסיקה אמיתית, במקום חישוב מלבנים ידני.**
+בגרסה הקודמת השחקן זז דרך `transform.position`, והקוד בדק חפיפה עם כל קיר בעצמו. עכשיו השחקן הוא `Rigidbody2D` דינמי שנדחף ב-`AddForce`, והמנוע הפיסיקלי עוצר אותו בקירות. החלופה הייתה גוף קינמטי עם `MovePosition`. בחרנו בגוף דינמי כי ההסחות צריכות להדוף את השחקן ולהיהדף ממנו, ורק שני גופים דינמיים עושים את זה לבד.
+
+### איך מוסיפים דברים חדשים
+
+| מה מוסיפים | אילו קבצים משתנים | למה רק הם |
+|---|---|---|
+| **סוג חדש של הסחת דעת** (למשל "שיחת טלפון" כבדה ואיטית) | קובץ נתונים חדש אחד: Create ← Next Interview ← Distraction Type. מוסיפים אותו לרשימה `Types` של `Distraction Spawner` בסצנה `City` | `Distraction` קורא את כל המספרים מה-`DistractionType`, ולכן אין שינוי בקוד |
+| **משרה חדשה** | קובץ נתונים חדש אחד: Create ← Next Interview ← Job Offer. מוסיפים אותו לרשימה `Jobs` של `Job Board` | הפאנל בונה כפתור לכל משרה ברשימה |
+| **דבר חדש שאפשר לתקשר איתו** (למשל מכונת קפה שמחזירה זמן) | מחלקה חדשה אחת שיורשת מ-`Interactable`, ופריפאב שלה. מוסיפים את הפריפאב ל-`Spawner` | החיישן, השחקן וה-HUD מכירים רק את `Interactable` |
+| **מכשול חדש שפוגע בשחקן** | מחלקה חדשה אחת שקוראת ל-`IDistractable.LoseFocus` | המכשול מכיר רק את הממשק, לא את השחקן |
+
+### סינגלטון ומשתנים סטטיים
+
+- **`GameSession` הוא הסינגלטון היחיד.** הוא מחזיק את מצב הסבב: פרויקטים, קשרים, זמן והמשרה שנבחרה. המצב הזה חייב לשרוד מעבר בין סצנות (עיר ← ראיון ← עיר או ניצחון), ולכן הוא יושב על אובייקט `DontDestroyOnLoad`. הוא נוצר בגישה הראשונה אליו, כך שאפשר להריץ כל סצנה ישירות מהעורך. מי שמאזין לו שומר את ההפניה ב-`OnEnable` ומבטל את ההרשמה ב-`OnDisable`.
+- **`PlaceholderArt`** מחזיק שני שדות סטטיים שהם מטמון בלבד (ריבוע ועיגול לבנים), כדי לא ליצור את אותה טקסטורה שוב ושוב. אין בהם מצב של המשחק.
+- **`Scenes` ו-`UIBuilder`** הן מחלקות סטטיות של קבועים ופונקציות עזר, בלי מצב.
+
+המשתנים הסטטיים של הגרסה הקודמת (`PlayerController2D.Frozen`, `VirtualJoystick.Value`, `HUD.Say`, `PuzzlePanel.Get`) הוסרו. במקומם יש אירועים ומצב השהיה ב-`GameSession`.
+
+### נתונים בנפרד מהלוגיקה
+
+- `GameSettings` (ב-`Assets/Resources`): אורך הסבב, משך קשר, בונוס לכל קשר.
+- `JobOffer`: שם המשרה, שכר, פרויקטים נדרשים, ציון נדרש.
+- `DistractionType`: צבע, גודל, מסה, מהירות, וכמה זמן מאבדים בפגיעה.
+- שאר הערכים (מהירות השחקן, טווח החיישן, קצב ה-Spawner) הם שדות `[SerializeField]` ב-Inspector.
 
 ---
 
-## 📄 רישיון
+## שימוש בבינה מלאכותית
 
-`[בחרו רישיון, או הסירו את הסעיף]`
+נעזרנו ב-Claude (Anthropic). הפירוט המלא, כולל הפרומפטים ובדיקת הקוד מול התרשים, נמצא בקובץ [docs/AI_USAGE.md](docs/AI_USAGE.md).

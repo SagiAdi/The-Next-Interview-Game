@@ -6,13 +6,17 @@
 [Bb]uilds/
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
+/Data/
+.utmp/
 *.csproj
 *.unityproj
 *.sln
+*.slnx
 *.suo
 *.user
 *.pidb
 *.booproj
 .vs/
+.vsconfig
 .idea/
 .DS_Store

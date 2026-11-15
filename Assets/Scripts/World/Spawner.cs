@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Spawns copies of one of the given prefabs (chosen at random) at random points
-// inside an area, at a fixed interval. It never spawns inside walls or on the player.
+// Spawns copies of the given prefabs (one is chosen at random) at free points inside an area,
+// at a fixed interval. It never spawns inside a wall or on top of the player.
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] prefabs;
@@ -11,45 +11,53 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float interval = 5f;
     [SerializeField] private int maxAlive = 4;
 
-    readonly List<GameObject> alive = new List<GameObject>();
-    readonly List<Collider2D> hits = new List<Collider2D>();
-    ContactFilter2D solidOnly;
-    float timer;
+    [SerializeField, Tooltip("A new object needs this much free space around it.")]
+    private float freeRadius = 0.5f;
 
-    // Used by the setup wizard to configure the spawner.
-    public void Setup(GameObject[] prefabs, Vector2 areaMin, Vector2 areaMax, float interval, int maxAlive)
-    {
-        this.prefabs = prefabs;
-        this.areaMin = areaMin;
-        this.areaMax = areaMax;
-        this.interval = interval;
-        this.maxAlive = maxAlive;
-    }
+    private readonly List<GameObject> alive = new List<GameObject>();
+    private readonly List<Collider2D> overlaps = new List<Collider2D>();
+    private ContactFilter2D solidOnly;
+    private float timer;
 
-    void Awake()
+    // Raised for every object right after it is created.
+    public event System.Action<GameObject> Spawned;
+
+    private void Awake()
     {
         solidOnly = new ContactFilter2D();
         solidOnly.useTriggers = false;
         timer = interval;
     }
 
-    void Update()
+    private void Update()
     {
         alive.RemoveAll(item => item == null);
 
         timer -= Time.deltaTime;
-        if (timer > 0f || prefabs == null || prefabs.Length == 0 || alive.Count >= maxAlive) return;
-        timer = interval;
+        if (timer > 0f || prefabs == null || prefabs.Length == 0 || alive.Count >= maxAlive)
+        {
+            return;
+        }
 
+        timer = interval;
+        SpawnAtFreePoint();
+    }
+
+    private void SpawnAtFreePoint()
+    {
         for (int attempt = 0; attempt < 20; attempt++)
         {
-            Vector2 p = new Vector2(Random.Range(areaMin.x, areaMax.x), Random.Range(areaMin.y, areaMax.y));
-            if (Physics2D.OverlapCircle(p, 0.5f, solidOnly, hits) == 0)
+            Vector2 point = new Vector2(Random.Range(areaMin.x, areaMax.x), Random.Range(areaMin.y, areaMax.y));
+            if (Physics2D.OverlapCircle(point, freeRadius, solidOnly, overlaps) > 0)
             {
-                GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
-                alive.Add(Instantiate(prefab, p, Quaternion.identity, transform));
-                return;
+                continue;
             }
+
+            GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
+            GameObject spawned = Instantiate(prefab, point, Quaternion.identity, transform);
+            alive.Add(spawned);
+            Spawned?.Invoke(spawned);
+            return;
         }
     }
 }

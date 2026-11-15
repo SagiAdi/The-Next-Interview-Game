@@ -1,26 +1,34 @@
 using UnityEngine;
 
-// A math puzzle spawned in the puzzle room. Solving it gives project points.
+// A math puzzle in the puzzle room. Solving it gives project points.
 public class PuzzleStation : Interactable
 {
-    int difficulty;
+    [SerializeField] private PuzzleRequestChannel puzzleRequests;
+    [SerializeField] private MessageChannel messages;
+
+    [SerializeField, Tooltip("1 = easy, 3 = hard. Harder puzzles give more project points.")]
+    private int minDifficulty = 1;
+
+    [SerializeField] private int maxDifficulty = 3;
+
+    private int difficulty;
 
     public override string Prompt => "Solve puzzle";
 
-    void Awake()
+    private void Awake()
     {
-        difficulty = Random.Range(1, 4); // 1 = easy, 3 = hard (hard gives more points)
+        difficulty = Random.Range(minDifficulty, maxDifficulty + 1);
     }
 
-    public override void Interact(PlayerController2D player)
+    public override void Interact()
     {
-        PuzzlePanel.Get().Open(difficulty, Solved);
+        puzzleRequests.Raise(new PuzzleRequest(difficulty, OnSolved));
     }
 
-    void Solved()
+    private void OnSolved()
     {
-        GameData.Instance.AddProject(difficulty);
-        HUD.Say("Project completed! +" + difficulty + " project point(s).");
+        GameSession.Instance.AddProject(difficulty);
+        messages.Raise("Project completed! +" + difficulty + " project point(s).");
         Destroy(gameObject);
     }
 }

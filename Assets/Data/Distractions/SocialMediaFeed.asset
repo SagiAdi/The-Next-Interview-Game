@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c9272e597333243a71e125222c591c, type: 3}
+  m_Name: SocialMediaFeed
+  m_EditorClassIdentifier: Assembly-CSharp::DistractionType
+  displayName: Social media feed
+  color: {r: 0.85, g: 0.3, b: 0.9, a: 1}
+  size: 0.8
+  mass: 1.2
+  cruiseSpeed: 1.8
+  spinTorque: 0.05
+  secondsPerImpactSpeed: 1.5
+  minPenaltySeconds: 3
+  maxPenaltySeconds: 10

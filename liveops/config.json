@@ -1,0 +1,16 @@
+{
+    "version": 1,
+    "liveEvent": {
+        "enabled": true,
+        "id": "hiring-fair-2026-11",
+        "title": "Hiring Fair!",
+        "message": "Companies are in a hurry to hire: connections are worth double, distractions are slower, and every job asks for 10 fewer points.",
+        "startUtc": "2026-11-20T00:00:00Z",
+        "endUtc": "2026-12-31T00:00:00Z",
+        "connectionSecondsMultiplier": 1.5,
+        "bonusPerConnection": 10,
+        "maxConnectionBonus": 30,
+        "distractionSpeedMultiplier": 0.6,
+        "requiredScoreDelta": -10
+    }
+}

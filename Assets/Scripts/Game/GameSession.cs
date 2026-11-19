@@ -8,6 +8,7 @@ using UnityEngine;
 public class GameSession : MonoBehaviour
 {
     private const string SettingsResource = "GameSettings";
+    private const float LiveRefreshSeconds = 60f;
 
     private static GameSession instance;
 
@@ -15,11 +16,19 @@ public class GameSession : MonoBehaviour
     private readonly List<float> connectionEndTimes = new List<float>();
     private readonly HashSet<JobOffer> interviewedJobs = new HashSet<JobOffer>();
     private bool timeUpRaised;
+    private LiveConfigLoader liveConfigLoader;
+    private LiveEvent pendingEvent = new LiveEvent();
+    private readonly LiveEvent neutralEvent = new LiveEvent();
+    private LiveEvent roundEvent;
+    private float lastLiveRefresh = float.NegativeInfinity;
 
     public event Action<int> ProjectsChanged;
     public event Action<int> ConnectionsChanged;
     public event Action<float> TimeChanged;
     public event Action TimeUp;
+
+    // Raised when a new live config arrives. It is used by the menu to announce the event.
+    public event Action<LiveEvent> LiveEventAvailable;
 
     // Created on first use, so every scene can be played directly from the editor.
     public static GameSession Instance
@@ -51,7 +60,38 @@ public class GameSession : MonoBehaviour
 
     public int Connections => connectionEndTimes.Count;
 
-    public int ConnectionBonus => Mathf.Min(Settings.maxConnectionBonus, Connections * Settings.bonusPerConnection);
+    // The live event that was announced most recently. It starts to count at the next round.
+    public LiveEvent PendingEvent => pendingEvent;
+
+    // The live event of the round in progress, or null when there is none.
+    public LiveEvent ActiveEvent => roundEvent == neutralEvent ? null : roundEvent;
+
+    // The numbers of the round: GameSettings first, then the live event on top.
+    public float RoundSeconds => Settings.roundSeconds * RoundEvent.roundSecondsMultiplier;
+
+    public float ConnectionSeconds => Settings.connectionSeconds * RoundEvent.connectionSecondsMultiplier;
+
+    public int BonusPerConnection =>
+        RoundEvent.bonusPerConnection > 0 ? RoundEvent.bonusPerConnection : Settings.bonusPerConnection;
+
+    public int MaxConnectionBonus =>
+        RoundEvent.maxConnectionBonus > 0 ? RoundEvent.maxConnectionBonus : Settings.maxConnectionBonus;
+
+    public float DistractionSpeedMultiplier => RoundEvent.distractionSpeedMultiplier;
+
+    public int ConnectionBonus => Mathf.Min(MaxConnectionBonus, Connections * BonusPerConnection);
+
+    private LiveEvent RoundEvent => roundEvent;
+
+    public int RequiredProjects(JobOffer job)
+    {
+        return Mathf.Max(1, job.requiredProjects + RoundEvent.requiredProjectsDelta);
+    }
+
+    public int RequiredScore(JobOffer job)
+    {
+        return Mathf.Clamp(job.requiredScore + RoundEvent.requiredScoreDelta, 0, 100);
+    }
 
     private void Awake()
     {
@@ -62,6 +102,7 @@ public class GameSession : MonoBehaviour
         }
 
         instance = this;
+        roundEvent = neutralEvent;
         DontDestroyOnLoad(gameObject);
 
         Settings = Resources.Load<GameSettings>(SettingsResource);
@@ -70,13 +111,39 @@ public class GameSession : MonoBehaviour
             Settings = ScriptableObject.CreateInstance<GameSettings>();
         }
 
+        liveConfigLoader = gameObject.AddComponent<LiveConfigLoader>();
+        liveConfigLoader.Loaded += OnLiveConfigLoaded;
+
         StartRound();
+    }
+
+    private void OnDestroy()
+    {
+        if (liveConfigLoader != null)
+        {
+            liveConfigLoader.Loaded -= OnLiveConfigLoaded;
+        }
+    }
+
+    private void OnLiveConfigLoaded(LiveConfig config)
+    {
+        pendingEvent = config.liveEvent ?? new LiveEvent();
+        LiveEventAvailable?.Invoke(pendingEvent);
     }
 
     public void StartRound()
     {
+        // The event is fixed for the whole round, so a config that arrives later cannot change the rules in the middle.
+        // A disabled or expired event is replaced by the neutral one, which changes nothing.
+        roundEvent = pendingEvent.IsActive(DateTime.UtcNow) ? pendingEvent : neutralEvent;
+        if (Time.realtimeSinceStartup - lastLiveRefresh > LiveRefreshSeconds)
+        {
+            lastLiveRefresh = Time.realtimeSinceStartup;
+            liveConfigLoader.Refresh();
+        }
+
         Projects = 0;
-        TimeLeft = Settings.roundSeconds;
+        TimeLeft = RoundSeconds;
         IsPaused = false;
         SelectedJob = null;
         ResultText = "";
@@ -127,7 +194,7 @@ public class GameSession : MonoBehaviour
 
     public void AddConnection()
     {
-        connectionEndTimes.Add(TimeLeft - Settings.connectionSeconds);
+        connectionEndTimes.Add(TimeLeft - ConnectionSeconds);
         ConnectionsChanged?.Invoke(Connections);
     }
 

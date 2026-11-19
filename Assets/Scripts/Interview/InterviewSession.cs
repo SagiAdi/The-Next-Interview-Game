@@ -116,7 +116,7 @@ public class InterviewSession : MonoBehaviour
         result.Average = sum / scores.Count;
         result.Bonus = session.ConnectionBonus;
         result.Final = Mathf.Min(100, result.Average + result.Bonus);
-        result.Required = job.requiredScore;
+        result.Required = session.RequiredScore(job);
         result.Hired = result.Final >= result.Required;
         Finished?.Invoke(result);
 

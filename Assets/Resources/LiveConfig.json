@@ -1,0 +1,9 @@
+{
+    "version": 1,
+    "liveEvent": {
+        "enabled": false,
+        "id": "none",
+        "title": "",
+        "message": ""
+    }
+}

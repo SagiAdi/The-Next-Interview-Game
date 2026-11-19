@@ -1,8 +1,27 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 // Title screen with the instructions and a Start button.
+// It also announces the live event that comes from the remote config.
 public class MenuScreen : MonoBehaviour
 {
+    private Text eventText;
+    private GameSession session;
+
+    private void OnEnable()
+    {
+        session = GameSession.Instance;
+        session.LiveEventAvailable += ShowEvent;
+    }
+
+    private void OnDisable()
+    {
+        if (session != null)
+        {
+            session.LiveEventAvailable -= ShowEvent;
+        }
+    }
+
     private void Start()
     {
         Canvas canvas = UIBuilder.CreateCanvas("Menu", 0);
@@ -22,7 +41,22 @@ public class MenuScreen : MonoBehaviour
             "Use the Job Board when you have enough projects. You have 5 minutes to get hired.",
             34, new Vector2(0, -30), new Vector2(1500, 360));
 
+        eventText = UIBuilder.CreateText(t, "", 34, new Vector2(0, -190), new Vector2(1700, 110));
+        eventText.color = new Color(1f, 0.85f, 0.3f);
+        ShowEvent(session.PendingEvent);
+
         UIBuilder.CreateButton(t, "Start", new Vector2(0, -330), new Vector2(360, 110), StartGame);
+    }
+
+    private void ShowEvent(LiveEvent liveEvent)
+    {
+        if (eventText == null)
+        {
+            return;
+        }
+
+        bool active = liveEvent.IsActive(System.DateTime.UtcNow);
+        eventText.text = active ? "LIVE EVENT: " + liveEvent.title + "\n" + liveEvent.message : "";
     }
 
     private void StartGame()

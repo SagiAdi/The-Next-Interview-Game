@@ -53,7 +53,7 @@ public class JobBoardPanel : MonoBehaviour
 
             JobOffer chosen = job;
             string label = job.title + "   |   salary " + job.salary + "/month   |   needs "
-                           + job.requiredProjects + " projects and interview score " + job.requiredScore + "+";
+                           + session.RequiredProjects(job) + " projects and interview score " + session.RequiredScore(job) + "+";
             UIBuilder.CreateButton(list, label, new Vector2(0, y), new Vector2(1000, 110), () => Apply(chosen));
             y -= 130f;
         }
@@ -66,10 +66,11 @@ public class JobBoardPanel : MonoBehaviour
     private void Apply(JobOffer job)
     {
         GameSession session = GameSession.Instance;
-        if (session.Projects < job.requiredProjects)
+        int required = session.RequiredProjects(job);
+        if (session.Projects < required)
         {
             feedbackText.text = "Not yet for " + job.title + ": you have " + session.Projects + " of "
-                                + job.requiredProjects + " project points.";
+                                + required + " project points.";
             return;
         }
 

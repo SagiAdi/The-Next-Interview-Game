@@ -8,6 +8,7 @@ public class Distraction : MonoBehaviour
 {
     private Rigidbody2D body;
     private DistractionType type;
+    private float cruiseSpeed;
 
     private void Awake()
     {
@@ -21,10 +22,11 @@ public class Distraction : MonoBehaviour
         transform.localScale = Vector3.one * type.size;
         GetComponent<SpriteRenderer>().color = type.color;
         body.mass = type.mass;
+        cruiseSpeed = type.cruiseSpeed * GameSession.Instance.DistractionSpeedMultiplier;
 
         // An impulse changes the velocity at once: speed = impulse / mass.
         Vector2 direction = Random.insideUnitCircle.normalized;
-        body.AddForce(direction * type.cruiseSpeed * body.mass, ForceMode2D.Impulse);
+        body.AddForce(direction * cruiseSpeed * body.mass, ForceMode2D.Impulse);
         body.AddTorque(type.spinTorque, ForceMode2D.Impulse);
     }
 
@@ -41,11 +43,11 @@ public class Distraction : MonoBehaviour
         if (speed < 0.05f)
         {
             Vector2 direction = Random.insideUnitCircle.normalized;
-            body.AddForce(direction * type.cruiseSpeed * body.mass, ForceMode2D.Impulse);
+            body.AddForce(direction * cruiseSpeed * body.mass, ForceMode2D.Impulse);
             return;
         }
 
-        float speedGap = type.cruiseSpeed - speed;
+        float speedGap = cruiseSpeed - speed;
         body.AddForce(velocity / speed * speedGap * body.mass);
     }
 
@@ -65,6 +67,6 @@ public class Distraction : MonoBehaviour
         // Bounce away from the contact point, so the distraction does not stick to the player.
         Vector2 contactPoint = collision.GetContact(0).point;
         Vector2 away = ((Vector2)transform.position - contactPoint).normalized;
-        body.AddForce(away * type.cruiseSpeed * body.mass, ForceMode2D.Impulse);
+        body.AddForce(away * cruiseSpeed * body.mass, ForceMode2D.Impulse);
     }
 }

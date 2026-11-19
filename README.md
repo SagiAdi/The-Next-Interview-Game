@@ -9,6 +9,8 @@
 - שחקו בדפדפן (itch.io): https://adisagi.itch.io/thenextinterview
 - סרטון משחק במובייל: https://youtu.be/IqiK_WastL4
 - תכנון המשחק (רכיבים רשמיים, מחקר שוק ותכנון שלבים): https://github.com/SagiAdi/The-Next-Interview
+- רכיבים דרמטיים (מטלה 5): [dramatic-elements.md](dramatic-elements.md)
+- סיפור ה-Twine (קובץ HTML לשחק בו): [story/the-next-interview.html](story/the-next-interview.html)
 
 **צוות:** שגיא רהט, עדי פלצקי.
 
@@ -279,6 +281,21 @@ classDiagram
 - `JobOffer`: שם המשרה, שכר, פרויקטים נדרשים, ציון נדרש.
 - `DistractionType`: צבע, גודל, מסה, מהירות, וכמה זמן מאבדים בפגיעה.
 - שאר הערכים (מהירות השחקן, טווח החיישן, קצב ה-Spawner) הם שדות `[SerializeField]` ב-Inspector.
+
+---
+
+## ניהול חי (מטלה 5, Live Ops)
+
+המשחק טוען בהתחלה קובץ קונפיגורציה מהריפו ([liveops/config.json](liveops/config.json)) ומפעיל לפיו אירוע חי, בלי לפרסם גרסה חדשה. כרגע מוגדר האירוע "Hiring Fair": קשרים שווים כפול, ההסחות איטיות יותר, וכל משרה דורשת 10 נקודות פחות.
+
+| קובץ | תפקיד |
+|---|---|
+| `Assets/Scripts/LiveOps/LiveConfigLoader.cs` | מוריד את הקובץ (עם גיבוי מקומי אם אין רשת) |
+| `Assets/Scripts/LiveOps/LiveConfig.cs`, `LiveEvent.cs` | מבנה הקובץ, וחלון הזמן של האירוע |
+| `Assets/Resources/LiveConfig.json` | הגיבוי שמגיע עם המשחק (בלי אירוע) |
+| `GameSession` | מחשב את המספרים של הסבב: `GameSettings` ועליהם האירוע |
+
+כדי להפעיל או לכבות אירוע: עורכים את `liveops/config.json` ב-GitHub (שדה `enabled`, או `startUtc` ו-`endUtc`) ועושים Commit ל-`main`. תוך כמה דקות כל שחקן מקבל את השינוי. פירוט מלא בסעיף 10 ב-[dramatic-elements.md](dramatic-elements.md).
 
 ---
 

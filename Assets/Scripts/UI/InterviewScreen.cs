@@ -26,7 +26,7 @@ public class InterviewScreen : MonoBehaviour
         JobOffer job = GameSession.Instance.SelectedJob;
         string header = job == null
             ? ""
-            : "Interview for " + job.title + "   (salary " + job.salary + "/month, needs " + job.requiredScore + "+)";
+            : "Interview for " + job.title + "   (salary " + job.salary + "/month, needs " + GameSession.Instance.RequiredScore(job) + "+)";
         UIBuilder.CreateText(t, header, 40, new Vector2(0, 440), new Vector2(1700, 80));
 
         questionText = UIBuilder.CreateText(t, "", 40, new Vector2(0, 240), new Vector2(1600, 200));

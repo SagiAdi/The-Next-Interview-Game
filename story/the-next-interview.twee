@@ -1,0 +1,344 @@
+:: StoryTitle
+The Next Interview: Five Minutes
+
+:: StoryData
+{
+  "ifid": "7D3A1B52-4C0E-4B8F-9A6D-2E5F8C1A9B34",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Rejection",
+  "zoom": 1
+}
+
+:: Rejection {"position":"400,100"}
+(set: $projects to 0)(set: $final to 0)(set: $bonus to 0)(set: $connections to 0)(set: $grit to 0)(set: $minutes to 0)(set: $score to 0)(set: $job to "")(set: $need to 0)(set: $needProjects to 0)
+''Rejection number 47.''
+
+You read the email twice, in case the words change.
+
+//"Thank you for applying. We liked your energy, but we are looking for candidates with real projects. Good luck with your search."//
+
+Your laptop fan hums. Forty-six emails like this one sit in a folder named ''Later''. You have one old project, a half-finished game from your final year, and a lot of confidence that is getting thinner every week.
+
+How do you answer the recruiter?
+
+[[Close the laptop and breathe->Breathe]]
+[[Write back an angry reply->Angry]]
+
+:: Breathe {"position":"250,250"}
+(set: $grit to it + 1)
+You close the laptop. The room gets quiet. You decide that 47 is only a number, and that numbers can be beaten.
+
+On the table, something you did not notice before: a golden envelope with no stamp.
+
+[[Open the envelope->Invitation]]
+
+:: Angry {"position":"550,250"}
+You type three paragraphs about how unfair it is. You read them again, delete everything, and write ''Thanks anyway.'' It is the first mature thing you have done all week, and it costs you nothing but your pride.
+
+On the table, something you did not notice before: a golden envelope with no stamp.
+
+[[Open the envelope->Invitation]]
+
+:: Invitation {"position":"400,400"}
+//You are invited to the Hiring District. Tonight only. Every candidate gets exactly five minutes inside the city. Bring one project. Bring a friend if you have one. The clocks do not stop.//
+
+Below the text, a small map. A room full of puzzles. A street full of people. A blue board with jobs. And a warning, written in red: ''Beware of distractions.''
+
+Whatever you do before you walk through the gate will follow you inside. You have a little time to prepare.
+
+[[Polish your one old project->Prep Project]]
+[[Call the old friend who works in tech->Prep Friend]]
+[[Skip it, you trust your talent->Prep Pride]]
+
+:: Prep Project {"position":"150,550"}
+(set: $projects to it + 1)
+You spend the evening fixing the bugs you ignored for a year. The game runs. It even feels a little fun.
+
+''Projects: 1.'' You walk to the gate with something real in your hands.
+
+[[Go to the gate->Gate]]
+
+:: Prep Friend {"position":"400,550"}
+(set: $connections to it + 1)
+She answers on the second ring. "Hiring District? Go to the street on the left. Ask for the mentor. Tell him I sent you."
+
+''Connections: 1.'' A name is a small thing, but a name opens doors.
+
+[[Go to the gate->Gate]]
+
+:: Prep Pride {"position":"650,550"}
+(set: $grit to it - 1)
+You stay on the couch and watch one more video. You are sure that talent is enough.
+
+You arrive at the gate with nothing prepared, and a quiet voice in your head that is not so sure.
+
+[[Go to the gate->Gate]]
+
+:: Gate {"position":"400,700"}
+The gate is a door in an ordinary wall. Behind it, a small city, built for one purpose: to hire.
+
+''The rules of this world''
+
+* Time is the only currency. The big clock on the tower shows five minutes, and it never stops.
+* Projects are earned in the Puzzle Room. A harder puzzle gives more.
+* Connections are earned in the street. Each one adds 5 points to your interview score, up to 15.
+* Distractions bounce around the city. Every hit steals time.
+* The Job Board lists the jobs. Each one asks for projects and a minimum interview score.
+
+You take a breath. The clock starts.
+
+[[Step into the city->City]]
+
+:: City {"position":"400,850"}
+Minute (print: $minutes + 1) of 5. Projects: $projects. Connections: $connections.
+
+(if: $minutes >= 5)[The clock on the tower hits zero. Everything goes silent.
+
+[[Time is up->Time Up]] ](else-if: $minutes >= 4)[The clock turns red. This is the last minute. If you want a job, the Job Board is the only place left to go.
+
+[[Run to the Job Board->Job Board]] ](else:)[Where to?
+
+[[The Puzzle Room->Puzzle Room]]
+[[The Street->Street]]
+[[The Job Board->Job Board]] ]
+
+:: Puzzle Room {"position":"150,1000"}
+Three stations glow in the dark room. A sign reads: //Every project starts with a puzzle.//
+
+[[The easy puzzle: safe, one project->Easy Puzzle]]
+[[The hard puzzle: two projects, if you can stay calm->Hard Puzzle]]
+[[Back to the city->City]]
+
+:: Easy Puzzle {"position":"50,1150"}
+(set: $minutes to it + 1)(set: $projects to it + 1)
+You solve it in a minute. Nothing special, nothing wrong. ''Projects: $projects.''
+
+[[Back to the city->City]]
+
+:: Hard Puzzle {"position":"250,1150"}
+(set: $minutes to it + 1)
+(if: $grit >= 1)[(set: $projects to it + 2)The pieces fight you, but you stay calm and breathe, the way you did at home. The last piece clicks. ''Two projects! Projects: $projects.'']
+(else:)[(set: $projects to it + 1)Your hands shake and the clock ticks in your ears. You rush, you fail twice, and you only just finish the easy half. ''One project. Projects: $projects.'']
+
+[[Back to the city->City]]
+
+:: Street {"position":"400,1000"}
+The street is crowded. People talk in small groups. Somewhere above you, a notification chime floats like a bee.
+
+(if: $minutes >= 2 and $connections < 3)[You see a red shape bouncing along the wall, coming your way.]
+
+[[Look for the mentor->Mentor]]
+[[Chat with a stranger by the coffee cart->Stranger]]
+[[Follow the red chime->Distraction]]
+[[Back to the city->City]]
+
+:: Mentor {"position":"400,1150"}
+(set: $minutes to it + 1)
+(if: $connections >= 1)[The mentor smiles. "Your friend called ahead. She said you were stubborn." He introduces you to the head of engineering. ''Connection made.'' (set: $connections to it + 1)]
+(else:)[The mentor listens to your story for a full minute. "You have the habit of building. Keep it." He promises to say good things about you. ''Connection made.'' (set: $connections to it + 1)]
+
+''Connections: $connections.''
+
+[[Back to the city->City]]
+
+:: Stranger {"position":"600,1150"}
+(set: $minutes to it + 1)
+You ask a stranger what she does. She is a designer who is tired of bad prototypes. You talk about your old game. She laughs in the right places. ''Connection made.'' (set: $connections to it + 1)
+
+''Connections: $connections.''
+
+[[Back to the city->City]]
+
+:: Distraction {"position":"250,1300"}
+The chime turns into a swarm of notifications. They circle you and show your name, again and again. A message from a friend. A sale. A video that is just about to get good.
+
+[[Put the phone in your pocket->Focus]]
+[[Check, just one second->Scroll]]
+
+:: Focus {"position":"150,1450"}
+(set: $minutes to it + 1)(set: $grit to it + 1)
+You turn the phone face down. The swarm drops away like it never mattered. It cost you a minute to learn that you can do this. ''Your grit grows.''
+
+[[Back to the city->City]]
+
+:: Scroll {"position":"350,1450"}
+(set: $minutes to it + 2)(set: $grit to it - 1)
+One second becomes two minutes. When you look up, the clock on the tower is a lot lower than you remember.
+
+[[Back to the city->City]]
+
+:: Job Board {"position":"700,1000"}
+The blue board glows. Three jobs are pinned on it.
+
+(if: $projects >= 1)[ [[Junior Developer: needs 1 project, interview score 60+->Junior]]
+](else:)[Junior Developer: needs 1 project. You have none yet.
+]
+(if: $projects >= 3)[ [[Senior Game Developer: needs 3 projects, interview score 80+->Senior]]
+](else:)[Senior Game Developer: needs 3 projects. You have $projects.
+]
+(if: $projects >= 5)[ [[Lead Designer: needs 5 projects, interview score 90+->Lead]]
+](else:)[Lead Designer: needs 5 projects. You have $projects.
+]
+(if: $minutes < 4)[ [[Not yet, back to the city->City]] ]
+(if: $projects < 1 and $minutes >= 4)[There is nothing here for someone with no projects, and there is no time left to earn one. [[The clock runs out->Time Up]] ]
+
+:: Junior {"position":"600,1150"}
+(set: $job to "Junior Developer")(set: $need to 60)
+You pull the card off the board. The door beside it opens.
+
+[[Walk into the interview->Question 1]]
+
+:: Senior {"position":"750,1150"}
+(set: $job to "Senior Game Developer")(set: $need to 80)
+The card is heavier than it looks. The door beside it opens.
+
+[[Walk into the interview->Question 1]]
+
+:: Lead {"position":"900,1150"}
+(set: $job to "Lead Designer")(set: $need to 90)
+A hush falls over the street. The door beside the board opens, slowly.
+
+[[Walk into the interview->Question 1]]
+
+:: Question 1 {"position":"750,1300"}
+A woman in a grey jacket looks up from a single sheet of paper. Her name tag says ''Dana, Hiring Manager''. She does not smile and she does not frown.
+
+"Application for $job. Question one. Tell me about a project you are proud of."
+
+(if: $projects >= 1)[ [[Tell the real story: what broke and how you fixed it->Q1 Real]]
+](if: $projects >= 1)[ [[List the technologies you used->Q1 List]]
+](if: $projects < 1)[ [[Admit that you have nothing finished yet->Q1 Honest]]
+][[Exaggerate, and hope she does not ask->Q1 Bluff]]
+
+:: Q1 Real {"position":"600,1450"}
+(set: $score to it + 90)
+You tell her about the bug that kept the game from running for a week, and the night you found it. Dana writes something down. For the first time, she looks at you instead of the paper.
+
+[[Next question->Question 2]]
+
+:: Q1 List {"position":"750,1450"}
+(set: $score to it + 65)
+You list engines, libraries and tools. Dana nods. "And what did you decide yourself?" You realize you listed everything except you.
+
+[[Next question->Question 2]]
+
+:: Q1 Honest {"position":"900,1450"}
+(set: $score to it + 40)
+"I have nothing finished yet," you say. Dana does not react. "Honesty is rare. Finishing things is rarer."
+
+[[Next question->Question 2]]
+
+:: Q1 Bluff {"position":"1050,1450"}
+(set: $score to it + 30)
+You describe a project that is bigger than the one you built. Dana asks one small technical question. The room gets very long.
+
+[[Next question->Question 2]]
+
+:: Question 2 {"position":"750,1600"}
+"Question two. Why do you want to work here, and what do you know about us?"
+
+(if: $connections >= 1)[ [[Mention the people you met in the street->Q2 People]]
+][[Say what you researched about the company->Q2 Research]]
+[[Say that you need the money->Q2 Money]]
+
+:: Q2 People {"position":"600,1750"}
+(set: $score to it + 90)
+You tell her who you talked to, and what you learned about how the teams work here. Dana raises an eyebrow. "You did your homework in the street, not on the internet. I like that."
+
+[[Next question->Question 3]]
+
+:: Q2 Research {"position":"800,1750"}
+(set: $score to it + 65)
+You repeat what you read about the company. It is correct, and a bit generic. Dana says "Thank you" in the tone people use for a good answer that is not a great one.
+
+[[Next question->Question 3]]
+
+:: Q2 Money {"position":"1000,1750"}
+(set: $score to it + 30)
+"I need the money," you say. It is true, and it is the only true thing you say. Dana looks at you for a moment. "So does everyone. Why us?"
+
+[[Next question->Question 3]]
+
+:: Question 3 {"position":"750,1900"}
+"Last question. A teammate is blocking your work. What do you do?"
+
+[[Ask for help early, and explain the situation->Q3 Help]]
+[[Solve it alone, even if it takes longer->Q3 Alone]]
+[[Blame the teammate->Q3 Blame]]
+
+:: Q3 Help {"position":"600,2050"}
+(set: $score to it + 90)
+"I would ask in the first hour, not the third day. A blocked teammate is usually a missing conversation." Dana smiles for the first time. It is very small.
+
+[[Wait for the decision->Decision]]
+
+:: Q3 Alone {"position":"800,2050"}
+(set: $score to it + 60)
+"I would find a way around." Dana writes: ''independent, maybe too much.''
+
+[[Wait for the decision->Decision]]
+
+:: Q3 Blame {"position":"1000,2050"}
+(set: $score to it + 20)
+You explain how the teammate failed. Dana puts down her pen. The silence lasts a long time.
+
+[[Wait for the decision->Decision]]
+
+:: Decision {"position":"750,2200"}
+(set: $bonus to (min: 15, $connections * 5))(set: $final to (min: 100, (round: $score / 3) + $bonus))
+Dana stacks the paper and taps it on the table.
+
+"Average of your answers: (print: (round: $score / 3)). Connections bonus: $bonus. Final score: $final. You needed $need."
+
+(if: $final >= $need)[(if: $job is "Lead Designer")[ [[Dana opens the door->Hired Lead]] ](else-if: $job is "Senior Game Developer")[ [[Dana opens the door->Hired Senior]] ](else:)[ [[Dana opens the door->Hired Junior]] ]](else:)[ [[Dana opens the door->Rejected]] ]
+
+:: Hired Lead {"position":"500,2400"}
+''You are hired as Lead Designer.''
+
+The tower clock goes quiet. Dana shakes your hand. "Forty-seven rejections, and one conversation changed it. You earned this." Outside, the city lights turn gold.
+
+[[What happened next->Epilogue]]
+
+:: Hired Senior {"position":"750,2400"}
+''You are hired as Senior Game Developer.''
+
+Dana hands you a badge. "The team starts on Monday. They already asked about your old game." You laugh, and the sound surprises you.
+
+[[What happened next->Epilogue]]
+
+:: Hired Junior {"position":"1000,2400"}
+''You are hired as Junior Developer.''
+
+It is not the biggest job on the board, but it is yours. Dana says, "Everyone here started at the bottom of the board. Do not stay there."
+
+[[What happened next->Epilogue]]
+
+:: Rejected {"position":"1250,2400"}
+''Rejected.''
+
+Dana is polite. "Not this time. Not because of who you are, but because of what you showed us today." She slides a card across the table. It says: //What you needed: more projects, more people, more honesty.//
+
+You walk out into the street with a strange feeling. It is not shame. It is a plan.
+
+[[Try the next Hiring Fair->Rejection]]
+[[What happened next->Epilogue]]
+
+:: Time Up {"position":"1250,1000"}
+The tower rings. The doors of every building close at the same time. A guard gently walks you to the gate.
+
+You had five minutes, and you spent them all on the way to the Job Board. Nobody blames you. Everybody in the city has done the same.
+
+[[Try the next Hiring Fair->Rejection]]
+[[What happened next->Epilogue]]
+
+:: Epilogue {"position":"750,2600"}
+Whatever happened tonight, you walk home differently. The email folder named ''Later'' is still full. But on top of the table, next to the golden envelope, there is a new page with the title of your next project.
+
+You decided what to do with your five minutes. The city is real: ''The Next Interview'' is a game you can play now, with the same rules, the same clock and the same distractions.
+
+(if: $job is not "" and $final >= $need)[You got the job in the story. Can you do it again in the game?](else:)[You missed it in the story. The game gives you a second chance.]
+
+(link: "Play The Next Interview (itch.io)")[(open-url: "https://adisagi.itch.io/thenextinterview")]
+
+//Story: Sagi Rahat and Adi Platzky. Game Development, Ariel University.//

@@ -10,7 +10,7 @@
 - סרטון משחק במובייל: https://youtu.be/IqiK_WastL4
 - תכנון המשחק (רכיבים רשמיים, מחקר שוק ותכנון שלבים): https://github.com/SagiAdi/The-Next-Interview
 - רכיבים דרמטיים (מטלה 5): [dramatic-elements.md](dramatic-elements.md)
-- סיפור ה-Twine (קובץ HTML לשחק בו): [story/the-next-interview.html](story/the-next-interview.html)
+- סיפור ה-Twine, לשחק בדפדפן: https://sagiadi.github.io/The-Next-Interview-Game/story/the-next-interview.html (קובץ ה-HTML: [story/the-next-interview.html](story/the-next-interview.html))
 
 **צוות:** שגיא רהט, עדי פלצקי.
 
@@ -296,6 +296,28 @@ classDiagram
 | `GameSession` | מחשב את המספרים של הסבב: `GameSettings` ועליהם האירוע |
 
 כדי להפעיל או לכבות אירוע: עורכים את `liveops/config.json` ב-GitHub (שדה `enabled`, או `startUtc` ו-`endUtc`) ועושים Commit ל-`main`. תוך כמה דקות כל שחקן מקבל את השינוי. פירוט מלא בסעיף 10 ב-[dramatic-elements.md](dramatic-elements.md).
+
+### איך בודקים את האירוע החי (למעריך/ה)
+
+האירוע מוגדר בקובץ [liveops/config.json](liveops/config.json), בתוך `liveEvent`. המשחק קורא אותו בכל פעם שנפתח, ואין צורך לבנות או להעלות אותו מחדש.
+
+| ערך לשינוי | הערך הנוכחי | מה הוא עושה |
+|---|---|---|
+| `enabled` | `true` | `true` מפעיל את האירוע, `false` מכבה |
+| `startUtc`, `endUtc` | 20.11.2026 עד 31.12.2026 | האירוע פעיל רק בחלון הזמן הזה (שעון UTC). מחוץ לו המשחק רגיל גם כש-`enabled` הוא `true` |
+| `requiredScoreDelta` | `-10` | משנה את הציון הנדרש בכל משרה |
+| `bonusPerConnection` | `10` (במקום 5) | בונוס לציון הראיון על כל קשר |
+| `distractionSpeedMultiplier` | `0.6` | ההסחות איטיות ב-40% |
+| `connectionSecondsMultiplier` | `1.5` | קשר נשאר פעיל 135 שניות במקום 90 |
+
+**צעדים:**
+1. פותחים את המשחק בדפדפן (בחלון גלישה בסתר): https://adisagi.itch.io/thenextinterview
+2. **מה רואים כשהאירוע פעיל:** בתפריט, מעל הכפתור Start, שורה צהובה: `LIVE EVENT: Hiring Fair!` עם הסבר. אחרי Start, בלוח המשרות הכחול הציונים הנדרשים הם **50, 70 ו-80** (ולא 60, 80, 90).
+3. **כדי לכבות:** ב-GitHub פותחים את `liveops/config.json`, משנים `"enabled": true` ל-`false` ועושים Commit ל-`main`.
+4. **מה רואים אחרי הכיבוי:** אחרי כ-5 דקות (GitHub שומר את הקובץ במטמון) ורענון המשחק, השורה הצהובה נעלמת, והציונים חוזרים ל-60, 80, 90.
+5. **כדי להפעיל שוב:** `"enabled": true`, וחלון זמן שמכיל את התאריך של היום.
+
+אם אין רשת או שהקובץ לא נטען, המשחק משתמש בגיבוי שמגיע איתו (`Assets/Resources/LiveConfig.json`), בלי אירוע, ומציג אזהרה ב-Console.
 
 ---
 

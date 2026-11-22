@@ -4,7 +4,7 @@
 
 * קוד המשחק: [Assets/Scripts](Assets/Scripts)
 * משחק בדפדפן: https://adisagi.itch.io/thenextinterview
-* סיפור ה-Twine (קובץ HTML שאפשר לשחק בו): [story/the-next-interview.html](story/the-next-interview.html), מקור: [story/the-next-interview.twee](story/the-next-interview.twee)
+* סיפור ה-Twine, לשחק בדפדפן: https://sagiadi.github.io/The-Next-Interview-Game/story/the-next-interview.html (קובץ HTML: [story/the-next-interview.html](story/the-next-interview.html), מקור: [story/the-next-interview.twee](story/the-next-interview.twee))
 * קובץ הקונפיגורציה החי: [liveops/config.json](liveops/config.json)
 
 בכל סעיף מסומן מה **כבר קיים** בקוד, ומה **מתוכנן** (עם הוראות למימוש).
